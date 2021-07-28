@@ -1,5 +1,7 @@
-const express = require("express");
-const path = require("path");
+import express from 'express';
+import data from './data.js'
+// const express = require("express");
+import path from 'path';
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -12,6 +14,12 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
+app.get('/api/products', (req, res)=>{
+  res.send(data.products);
+})
+app.get("/", (req, res)=>{
+  res.send("Server is ready")
+})
 
 // Send every other request to the React app
 // Define any API routes before this runs
@@ -20,5 +28,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🌎 ==> API server now on port ${PORT}!`);
+  console.log(`🌎 ==> API server now on port http://localhost:${PORT}`);
 });
