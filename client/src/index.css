@@ -129,6 +129,10 @@ li{
 .col-2{
   flex: 2 1 50rem;
 }
+
+.min-30{
+  min-width: 30rem;
+}
 /* Image */
 img {
   border-radius: 0.5rem;
@@ -139,6 +143,11 @@ img.medium {
   object-fit: cover;
  
 }
+img.small {
+  max-width: 5rem;
+  width: 100%
+}
+
 
 img.large {
   width: 100%;
