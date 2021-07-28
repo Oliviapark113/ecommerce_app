@@ -5,6 +5,7 @@ import MessageBox from '../components/MessageBox';
 import {useSelector, useDispatch} from 'react-redux'
 import { listProducts } from '../action/productAction';
 
+
 export default function HomeScreen() {
   const dispatch = useDispatch();
   const productList = useSelector(state=>state.productList);
@@ -27,9 +28,8 @@ export default function HomeScreen() {
           product={product} />
       ))
     }
-    </div>)
-       }
-
+    </div>
+    )}
   </div>
   )
 }
