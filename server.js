@@ -1,32 +1,40 @@
 import express from 'express';
-import data from './data.js'
 import path from 'path';
+import mongoose from 'mongoose';
+import userRouter from'./routers/userRouter.js';
+import productRouter from './routers/productRouter.js'
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use((err, req, res, next)=>{
+  res.status(500).send({message:err.message})
+})
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/amazonia',
+  {  useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify:false})
+    .then(
+      console.log("Connected to MongoDB")
+    ).catch(err=>console.log(err))
+
 // Define API routes here
-//Single prodct 
-app.get('/api/products/:id', (req, res)=>{
-  const product = data.products.find(product => product._id === req.params.id)
-  if(product){
-    res.send(product);
-  } else{
-    res.status(404).send({message:"Product not Found"})
-  }
-  
-})
-//All Products
-app.get('/api/products', (req, res)=>{
-  res.send(data.products);
-})
+app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
+
 
 app.get("/", (req, res)=>{
   res.send("Server is ready")

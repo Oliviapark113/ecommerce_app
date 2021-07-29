@@ -1,7 +1,23 @@
+import bcrypt from 'bcryptjs';
+
+
 const data = {
+    users:[
+        {
+          name: 'Olivia',
+          email: 'oliviaAdmin@gmail.com',
+          password: bcrypt.hashSync('5378', 8),
+          isAdmin: true,
+        },
+        {
+            name: 'Gunoo',
+            email: 'gunooUser@gmail.com',
+            password: bcrypt.hashSync('1234', 8),
+            isAdmin: false,
+          },
+    ],
     products:[
         {
-            _id:"1",
             name:"Olivia's Tank Top",
             category:"Tops",
             image:"/images/t1.png",
@@ -15,7 +31,6 @@ const data = {
 
         },
         {
-            _id:"2",
             name:"Lules Bra Top",
             category:"Tops",
             image:"/images/a1.png",
@@ -28,7 +43,6 @@ const data = {
 
         },
         {
-            _id:"3",
             name:"Lules Cross Front Top",
             category:"Tops",
             image:"/images/t2.png",
@@ -41,7 +55,6 @@ const data = {
 
         },
         {
-            _id:"4",
             name:"Olivia's ruffled Crop Top",
             category:"Tops",
             image:"/images/s1.png",
@@ -54,7 +67,6 @@ const data = {
 
         },
         {
-            _id:"5",
             name:"Olivia's Moto Jacket",
             category:"Jacket",
             image:"/images/jk1.png",
@@ -67,7 +79,6 @@ const data = {
 
         },
         {
-            _id:"6",
             name:"Lules Strap Dress",
             category:"Dress",
             image:"/images/dr1.png",
@@ -80,7 +91,6 @@ const data = {
 
         },
         {
-            _id:"7",
             name:"Jamies Shorts",
             category:"Pants",
             image:"/images/b1.png",
