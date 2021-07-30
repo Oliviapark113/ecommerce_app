@@ -186,6 +186,9 @@ img.large {
   color:#404040;
 }
 /* Alert */
+.loading{
+  display: block !important;
+}
 
 .sucess{
   color: #20a020;
