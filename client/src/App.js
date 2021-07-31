@@ -5,10 +5,11 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import { useDispatch, useSelector } from "react-redux";
-import SigninScreen from "./screens/SigninScreen";
+import SigninScreen from './screens/SigninScreen';
 import {signout } from "./action/userAction";
-import RegisterScreen from "./screens/RegisterScreen";
+import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+import PaymentMethodScreen from './screens/PaymentMethodScreen';
 
 
 
@@ -61,6 +62,7 @@ function App() {
             <Route path="/register" component={RegisterScreen}></Route>
             <Route path="/signin" component={SigninScreen}></Route>
             <Route path='/shipping'component={ShippingAddressScreen}></Route>
+            <Route path='/payment'component={PaymentMethodScreen}></Route>
 
           </main>
           <footer className="row center">

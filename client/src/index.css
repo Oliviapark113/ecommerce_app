@@ -228,8 +228,7 @@ img.large {
 }
 
 .form label {
-  margin: 1rem;
-  display: block;
+  margin: 1rem 0;
 }
 
 /* Dropdowm */
