@@ -213,6 +213,7 @@ img.large {
 .alert-danger{
   color: #a02020;
   background-color: #ffe0e0e0;
+  padding: 1rem;
 }
 /* Form */
 
