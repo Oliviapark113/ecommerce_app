@@ -215,6 +215,12 @@ img.large {
   background-color: #ffe0e0e0;
   padding: 1rem;
 }
+
+.alert-success{
+  color: #20a020;
+  background-color:lightgreen;
+  padding: 1rem;
+}
 /* Form */
 
 .form{

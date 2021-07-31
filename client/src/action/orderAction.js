@@ -1,4 +1,4 @@
-import { ORDER_CREATE_REQUEST, ORDER_CREATE_FAIL, ORDER_CREATE_SUCCESS, ORDER_DETAILS_REQUEST, ORDER_DETAILS_FAIL, ORDER_DETAILS_SUCCESS } from "../constants/orderConstants"
+import { ORDER_CREATE_REQUEST, ORDER_CREATE_FAIL, ORDER_CREATE_SUCCESS, ORDER_DETAILS_REQUEST, ORDER_DETAILS_FAIL, ORDER_DETAILS_SUCCESS, ORDER_PAY_REQUEST, ORDER_PAY_FAIL, ORDER_PAY_SUCCESS } from "../constants/orderConstants"
 import Axios from "axios";
 import { CART_EMPTY } from "../constants/cartConstants";
 
@@ -45,5 +45,26 @@ export const detailsOrder = (orderId) => async(dispatch, getState)=>{
         error.response.message.data.message
         : error.message;
         dispatch({type:ORDER_DETAILS_FAIL, payload:message})
+    }
+}
+
+export const payOrder = (order, paymentResult) => async(dispatch, getState)=>{
+    dispatch({type:ORDER_PAY_REQUEST, payload:{order, paymentResult}});
+    const {userSignin:{userInfo}} =getState();
+    try{
+        const {data} = await Axios.put(
+            `/api/orders/${order._id}/pay`, paymentResult, 
+          { headers: { Authorization:`Bearer ${userInfo.token}`}})
+
+          dispatch({type: ORDER_PAY_SUCCESS, payload:data})
+
+    }
+
+    catch(error){
+        const message =
+        error.response && error.response.message.data.message?
+        error.response.message.data.message
+        : error.message;
+        dispatch({type:ORDER_PAY_FAIL, payload:message})
     }
 }
