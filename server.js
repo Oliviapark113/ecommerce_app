@@ -3,10 +3,13 @@ import path from 'path';
 import mongoose from 'mongoose';
 import userRouter from'./routers/userRouter.js';
 import productRouter from './routers/productRouter.js'
+import orderRouter from './routers/orderRouter.js';
+import dotenv from 'dotenv';
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-import dotenv from 'dotenv';
+
 dotenv.config();
 
 // Define middleware here
@@ -34,6 +37,7 @@ mongoose.connect(
 // Define API routes here
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+app.use('/api/orders',orderRouter);
 
 
 app.get("/", (req, res)=>{
