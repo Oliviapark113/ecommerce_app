@@ -2,19 +2,20 @@ import express from 'express';
 import path from 'path';
 import mongoose from 'mongoose';
 import userRouter from'./routers/userRouter.js';
-import productRouter from './routers/productRouter.js'
+import productRouter from './routers/productRouter.js';
 import orderRouter from './routers/orderRouter.js';
 import dotenv from 'dotenv';
+
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-
 dotenv.config();
 
 // Define middleware here
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use((err, req, res, next)=>{
   res.status(500).send({message:err.message})
 })
@@ -22,7 +23,6 @@ app.use((err, req, res, next)=>{
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
 
 mongoose.connect(
   process.env.MONGODB_URI || 'mongodb://localhost/amazonia',
@@ -39,11 +39,9 @@ app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders',orderRouter);
 
-
-app.get("/", (req, res)=>{
-  res.send("Server is ready")
-})
-
+app.get('/api/config/paypal',(req, res)=>{
+  res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
+});
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {

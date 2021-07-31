@@ -1,31 +1,52 @@
-import React, { useEffect } from 'react';
-import CheckoutSteps from '../components/CheckoutSteps';
+import React, { useEffect, useState } from 'react';
+import {PayPalButton} from 'react-paypal-button-v2'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { detailsOrder } from '../action/orderAction';
+import Axios from 'axios';
+
 
 export default function OrderScreen(props) {
   const orderId = props.match.params.id;
+  console.log(orderId)
   const orderDetails = useSelector(state=>state.orderDetails)
   const {order, loading, error} = orderDetails;
-console.log(orderDetails)
+//   console.log(order)
+  const successPaymentHandler = () =>{
+      //TODO add payment action
+  }
 
-//   const toPrice =(num) => Number(num.toFixed(2));
-//   order.itemsPrice = toPrice(
-//       order.itemsPrice.reduce((a, c) => a + c.qty * c.price, 0)
-//     );
-  
-//   order.shippingPrice = order.itemsPrice >100? toPrice(0):toPrice(10);
-//   order.taxPrice= toPrice(0.15*order.itemsPrice);
-//   order.totalPrice = order.itemsPrice + order.shippingPrice + order.taxPrice;
-
+  const [sdkReady, setSdkReady] = useState(false);
   const dispatch = useDispatch();
 
     useEffect(()=>{
-      dispatch(detailsOrder(orderId))
-    },[dispatch, orderId])
+        console.log(order)
+        const addPayPalScript = async () =>{
+            const {data} = await Axios.get('/api/config/paypal');
+            const script = document.createElement('script');
+            script.type="text/javascript"
+            script.src=`https://www.paypal.com/sdk/js?client-id=${data}`
+            script.async = true;
+            script.onload = ()=>{
+                setSdkReady(true);
+            };
+            document.body.appendChild(script);
+        };
+      if(!order){
+           dispatch(detailsOrder(orderId))
+      } else {
+          if(!order.isPaid){
+              if(!window.paypal){
+                addPayPalScript();
+              }else{
+                  setSdkReady(true);
+              }
+          }
+      }
+     
+    },[dispatch,order, orderId,sdkReady])
   return  loading? (<LoadingBox></LoadingBox>) :
            error?(<MessageBox variant="danger">{error}</MessageBox>)
            :( <div>
@@ -119,6 +140,16 @@ console.log(orderDetails)
                               <div><strong>${parseInt(order.totalPrice).toFixed(2)}</strong></div>
                           </div>
                       </li>
+                      {!order.isPaid &&(
+                              <li>
+                                  {!sdkReady?(<LoadingBox></LoadingBox>):
+                                  (<PayPalButton 
+                                    amount={order.totalPrice}
+                                    onSuccess={successPaymentHandler}></PayPalButton>)
+                                  }
+                              </li>
+                          )
+                      }
                   </ul>
               </div>
           </div>
