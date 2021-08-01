@@ -13,9 +13,7 @@ export default function OrderScreen(props) {
   const orderId = props.match.params.id;
   const orderDetails = useSelector(state=>state.orderDetails)
   const {order, loading, error} = orderDetails;
-  const successPaymentHandler = (paymentResult) =>{
-      dispatch(payOrder(order, paymentResult));
-  }
+
   const [sdkReady, setSdkReady] = useState(false);
   const orderPay = useSelector(state => state.orderPay);
   const {loading: loadingPay, error:errorPay, success: successPay } = orderPay;
@@ -47,7 +45,12 @@ export default function OrderScreen(props) {
           }
       }
      
-    },[dispatch,order, orderId,sdkReady])
+    },[dispatch,order, orderId,sdkReady, successPay])
+
+   const successPaymentHandler = (paymentResult) =>{
+        dispatch(payOrder(order, paymentResult));
+    }
+
   return  loading? (<LoadingBox></LoadingBox>) :
            error?(<MessageBox variant="danger">{error}</MessageBox>)
            :( <div>
@@ -120,25 +123,25 @@ export default function OrderScreen(props) {
                       <li>
                           <div className="row">
                               <div>Items</div>
-                              <div>${parseInt(order.itemsPrice).toFixed(2)}</div>
+                              <div>${order.itemsPrice.toFixed(2)}</div>
                           </div>
                       </li>
                       <li>
                           <div className="row">
                               <div>Shipping</div>
-                              <div>${parseInt(order.shippingPrice).toFixed(2)}</div>
+                              <div>${order.shippingPrice.toFixed(2)}</div>
                           </div>
                       </li>
                       <li>
                           <div className="row">
                               <div>Tax</div>
-                              <div>${parseInt(order.taxPrice).toFixed(2)}</div>
+                              <div>${order.taxPrice.toFixed(2)}</div>
                           </div>
                       </li>
                       <li>
                           <div className="row">
                               <div><strong>Order Total</strong></div>
-                              <div><strong>${parseInt(order.totalPrice).toFixed(2)}</strong></div>
+                              <div><strong>${order.totalPrice.toFixed(2)}</strong></div>
                           </div>
                       </li>
                       {!order.isPaid &&(

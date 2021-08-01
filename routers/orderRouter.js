@@ -50,7 +50,7 @@ orderRouter.put('/:id/pay', isAuth, expressAsyncHandler(async(req, res)=>{
                                 update_time: req.body.update_time,
                                 email_address:req.body.email_address,};
      const updatedOrder = await order.save();
-     res.send({message: 'Order Paid', order:updateOrder});
+     res.send({message: 'Order Paid', order:updatedOrder});
     } else {
         res.status(404).send({message: 'Order Not Found'});
     }
