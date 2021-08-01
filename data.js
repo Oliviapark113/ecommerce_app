@@ -101,6 +101,18 @@ const data = {
             numReviews:30,
             description: "White Shorts"
 
+        },
+        {
+            name:"Legging",
+            category:"Active wear",
+            image:"/images/l1.png",
+            price: 68,
+            countInStock:38,
+            brand:"JNYC",
+            rating:5,
+            numReviews:30,
+            description: "V line waist Legging"
+
         }
     
     ]

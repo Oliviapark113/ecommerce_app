@@ -12,6 +12,7 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
+import OrderHistroyScreen from "./screens/OrderHistroyScreen";
 
 
 
@@ -49,7 +50,13 @@ function App() {
                     {userInfo.name} <i className="fa fa-caret-down"></i>
                   </Link>
                   <ul className="dropdown-content">
+                    <li>
+                      <Link to="/orderhistory">Order History</Link>
+                    </li>
+                    <li>
                     <Link to="#signout" onClick={signoutHandler}>Sign Out</Link>
+                    </li>
+                  
                   </ul>
                   </div>
                 ):<Link to="/signin">Sign In</Link>
@@ -60,13 +67,14 @@ function App() {
           <main>
             <Route path="/cart/:id?" component={CartScreen}></Route>
             <Route path="/product/:id" component={ProductScreen}></Route>
-            <Route path="/" component={HomeScreen} exact></Route>
             <Route path="/register" component={RegisterScreen}></Route>
             <Route path="/signin" component={SigninScreen}></Route>
             <Route path='/shipping'component={ShippingAddressScreen}></Route>
             <Route path='/payment'component={PaymentMethodScreen}></Route>
             <Route path='/placeorder'component={PlaceOrderScreen}></Route>
             <Route path='/order/:id'component={OrderScreen}></Route>
+            <Route path='/orderhistory' component={OrderHistroyScreen}></Route>
+            <Route path="/" component={HomeScreen} exact></Route>
           </main>
           <footer className="row center">
             All right reserved.
