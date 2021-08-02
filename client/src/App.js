@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./index.css"
 import {BrowserRouter,Route,Link} from 'react-router-dom'
 import HomeScreen from "./screens/HomeScreen";
@@ -13,6 +13,8 @@ import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import OrderHistroyScreen from "./screens/OrderHistroyScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import PrivateRoute from "./components/PrivateRoute";
 
 
 
@@ -51,6 +53,9 @@ function App() {
                   </Link>
                   <ul className="dropdown-content">
                     <li>
+                      <Link to="/profile">User Profile</Link>
+                    </li>
+                    <li>
                       <Link to="/orderhistory">Order History</Link>
                     </li>
                     <li>
@@ -74,6 +79,7 @@ function App() {
             <Route path='/placeorder'component={PlaceOrderScreen}></Route>
             <Route path='/order/:id'component={OrderScreen}></Route>
             <Route path='/orderhistory' component={OrderHistroyScreen}></Route>
+            <PrivateRoute path="/profile" component={ProfileScreen} exact></PrivateRoute>
             <Route path="/" component={HomeScreen} exact></Route>
           </main>
           <footer className="row center">

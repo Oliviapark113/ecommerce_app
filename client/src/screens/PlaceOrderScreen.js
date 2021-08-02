@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import CheckoutSteps from '../components/CheckoutSteps';
-import { CART_SAVE_PAYMENT_METHOD } from '../constants/cartConstants';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createOrder } from '../action/orderAction';

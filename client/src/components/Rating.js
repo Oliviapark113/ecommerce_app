@@ -1,9 +1,9 @@
 import React from 'react'
 import '../index.css'
-import data from '../data'
+
 
 export default function Rating(props) {
-    const { rating, numReviews, caption } = props;
+    const { rating, numReviews } = props;
   return (
      <div className="rating">
         <span>
