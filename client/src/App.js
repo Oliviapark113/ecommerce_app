@@ -82,9 +82,9 @@ function App() {
             <PrivateRoute path="/profile" component={ProfileScreen} exact></PrivateRoute>
             <Route path="/" component={HomeScreen} exact></Route>
           </main>
-          <footer className="row center">
+          {/* <footer className="row center">
             All right reserved.
-          </footer>
+          </footer> */}
         </div>
 
 
