@@ -6,12 +6,9 @@ import productRouter from './routers/productRouter.js';
 import orderRouter from './routers/orderRouter.js';
 import dotenv from 'dotenv';
 
-
+dotenv.config();
 const PORT = process.env.PORT || 3001;
 const app = express();
-
-dotenv.config();
-
 // Define middleware here
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,9 +35,12 @@ mongoose.connect(
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders',orderRouter);
-
 app.get('/api/config/paypal',(req, res)=>{
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
+});
+
+app.get('/', (req, res) => {
+  res.send('Server is ready');
 });
 // Send every other request to the React app
 // Define any API routes before this runs

@@ -5,11 +5,11 @@
 Users can enjoy shop online shopping, where a user can sign up and Add to Cart, Proceed to check out, enter shipping info and select payment method and pay via paypal or stripe. User can view order history and also update user profile. 
 
 ## Links
-Heroku: 
+Heroku:https://arcane-plains-88992.herokuapp.com/
 Github:https://github.com/Oliviapark113/ecommerce_app
 
 ## Usage & Features 
-1. Go to the deployed sites: 
+1. Go to the deployed sites:https://arcane-plains-88992.herokuapp.com/
 2. Register & Create an account then sign in.
 
 ![Register_Image](./reademeimages/registerScreen.png)
