@@ -1,4 +1,10 @@
 import bcrypt from 'bcryptjs';
+// import mongoose from 'mongoose';
+// import Product from './models/productModel.js';
+// import User from './models/userModel.js';
+
+
+// mongoose.connect(process.env.MONGODB_URI|| "mongodb+srv://dbCoder:dbCoder@cluster0.0u8fy.mongodb.net/amazonia?retryWrites=true&w=majority");
 
 
 const data = {
@@ -118,4 +124,19 @@ const data = {
     ]
 }
 
+// const runSeeder = async () =>{
+//     try{
+       
+//          // await Product.remove({});
+//         const createdProducts = await Product.insertMany(data.products)
+//         res.send({createdProducts});
+
+//     }
+//     catch(err) {
+//         throw new err
+//       }
+//       process.exit()
+// }
+
+// runSeeder()
 export default data;
